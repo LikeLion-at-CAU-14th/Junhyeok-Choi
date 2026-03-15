@@ -56,4 +56,12 @@
 
 ---
 
+<a href="https://www.gitanimals.org/en_US?utm_medium=image&utm_source=do0hetfield&utm_content=farm">
+<img
+  src="https://render.gitanimals.org/farms/do0hetfield"
+  width="600"
+  height="300"
+/>
+</a>
+
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=0:fdbb2d,50:b21f1f,100:1a2a6c&height=120&section=footer)
