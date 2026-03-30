@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="signup">
+        <header>
+            <div class="logo"><img src="./logo.png"></div>
+            <h1>회원 가입을 위해 정보를 입력해주세요</h1>
+        </header>
+
+        <form action="" method="get">
+            <div class="form-info">
+                <label for="email">* 이메일</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-info">
+                <label for="name">* 이름</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="form-info">
+                <label for="password">* 비밀번호</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-info">
+                <label for="email">* 비밀번호 확인</label>
+                <input type="email" id="email" name="email">
+            </div>
+
+            <div class="gender-info">
+                <label for="female">
+                    <input type="radio"  id="female" name="gender" value="female">
+                    여성
+                </label>
+
+                <label for="male">
+                    <input type="radio" id="male" name="gender" value="male">
+                    남성
+                </label>
+            </div>
+
+            <div class="agreement">
+                <input type="checkbox" id="agree" required>
+                <label for="agree">이용약관 개인정보 수집 및 이용, 마케팅 활용 선택에 모두 동의합니다.</label>
+            </div>
+
+            <div class="line"></div>
+
+            <button type="submit" class="submit-btn">가입하기</button>
+        </form>
+    </main>
+</body>
+</html>
