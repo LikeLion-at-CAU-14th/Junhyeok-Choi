@@ -9,6 +9,15 @@ const rockBtn = document.getElementById("rock");
 const scissorsBtn = document.getElementById("scissors");
 const paperBtn = document.getElementById("paper");
 
+//점수 상태 변수
+let myScore = 0;
+let computerScore = 0;
+
+//점수판 DOM 요소
+const myScoreText = document.querySelector(".my-score");
+const computerScoreText = document.querySelector(".computer-score");
+const displayResult = document.getElementById("display-result");
+
 // 2. 이벤트 설정
 rockBtn.addEventListener("click", displayMyChoice);
 scissorsBtn.addEventListener("click", displayMyChoice);
@@ -44,8 +53,41 @@ function displayComChoice(result) {
     computerIcon.className = result[1];
 }
 
+// 승패 판정 함수
+function getResult(my, com) {
+    if (my === com) return "draw";
+
+    if (
+        (my === "rock" && com === "scissors") ||
+        (my === "scissors" && com === "paper") ||
+        (my === "paper" && com === "rock")
+    ) {
+        return "win";
+    } else {
+        return "lose";
+    }
+}
+
 // 6. start 함수
 function start(mychoice) {
     let resultArray = getComChoice();
     displayComChoice(resultArray);
+
+    let comChoice = resultArray[0];
+
+    let result = getResult(mychoice, comChoice);
+
+    // 승패 결과 텍스트 표시
+    displayResult.innerText = result;
+
+    // 점수 처리
+    if (result === "win") {
+        myScore++;
+    } else if (result === "lose") {
+        computerScore++;
+    }
+
+    // 변경된 점수 화면에 반영
+    myScoreText.innerText = myScore;
+    computerScoreText.innerText = computerScore;
 }
