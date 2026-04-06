@@ -119,3 +119,16 @@ function resetGame() {
     // 5. 결과 텍스트 초기화
     displayResult.innerText = "";
 }
+
+// 다크모드 버튼
+const themeBtn = document.getElementById("theme-button");
+
+themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("change");
+
+    if (document.body.classList.contains("change")) {
+        themeBtn.className = "fa-solid fa-sun change-reverse";
+    } else {
+        themeBtn.className = "fa-solid fa-moon change-reverse";
+    }
+});

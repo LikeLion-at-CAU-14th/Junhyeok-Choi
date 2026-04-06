@@ -69,7 +69,7 @@ button {
 
 /* section2(경기장) */
 .display-section {
-    height: 60;
+    height: 60%;
     font-size: 45px;
 }
 
@@ -157,4 +157,38 @@ button {
 
 .title {
   border-bottom: black solid 3px;
+}
+
+/* 다크모드 */
+body.change {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* 메인 컨테이너 */
+body.change #contents-wrapper {
+  border: white solid 4px;
+}
+
+/* 제목 밑줄 */
+body.change .title {
+  border-bottom: white solid 3px;
+}
+
+/* 아이콘 버튼 */
+body.change .fa-regular {
+  border: white 4px solid;
+}
+
+/* 리셋 버튼 */
+body.change .change-reverse {
+  border: white solid 2px;
+  background-color: white;
+  color: black;
+}
+
+/* 다크모드 버튼 */
+#theme-button {
+  font-size: 15px;
+  border-radius: 50%;
 }
