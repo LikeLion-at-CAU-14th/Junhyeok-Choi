@@ -18,10 +18,16 @@ const myScoreText = document.querySelector(".my-score");
 const computerScoreText = document.querySelector(".computer-score");
 const displayResult = document.getElementById("display-result");
 
+// 리셋 버튼 DOM 요소
+const resetBtn = document.getElementById("reset-button");
+
 // 2. 이벤트 설정
 rockBtn.addEventListener("click", displayMyChoice);
 scissorsBtn.addEventListener("click", displayMyChoice);
 paperBtn.addEventListener("click", displayMyChoice);
+
+// 리셋 버튼 클릭 이벤트
+resetBtn.addEventListener("click", resetGame);
 
 // 3. displayMyChoice 함수 설정
 function displayMyChoice(e) {
@@ -90,4 +96,26 @@ function start(mychoice) {
     // 변경된 점수 화면에 반영
     myScoreText.innerText = myScore;
     computerScoreText.innerText = computerScore;
+}
+
+// 리셋 함수
+function resetGame() {
+    // 1. 점수 초기화
+    myScore = 0;
+    computerScore = 0;
+
+    // 2. 점수 화면 초기화
+    myScoreText.innerText = 0;
+    computerScoreText.innerText = 0;
+
+    // 3. 선택 상태 초기화
+    myHandText.innerText = "";
+    computerText.innerText = "";
+
+    // 4. 아이콘 초기화
+    myHandIcon.className = "";
+    computerIcon.className = "";
+
+    // 5. 결과 텍스트 초기화
+    displayResult.innerText = "";
 }
