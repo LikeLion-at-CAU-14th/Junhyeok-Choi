@@ -1,4 +1,5 @@
 import Todo from "../DOM/Todo.js";
+import CompleteController from "./CompleteController.js";
 
 class TodoController {
     constructor(todo) {
@@ -17,9 +18,7 @@ class TodoController {
 
         addTodo() {
             const todoList = document.getElementById("to-do-list");
-            const input = document.querySelector('input');
-            todoList.appendChild(this.newTodo.addRow());
-            input.value = '';
+            todoList.appendChild(this.newTodo.addRow())
         }
 
         delTodo() {
@@ -29,13 +28,13 @@ class TodoController {
         }
 
         doneTodo() {
-            this.innerNode.classList.toggle('done-text');
-            this.comBtnNode.classList.toggle('done-btn');
-            if(this.comBtnNode.innerText == '미완'){
-                this.comBtnNode.innerText = '완료';
-            } else{
-                this.comBtnNode.innerText = '미완';
-            }
+            const todoText = this.innerNode.innerText;
+            // 1. Todo 목록에서 제거
+            const todoList = document.getElementById("to-do-list");
+            todoList.removeChild(this.newTodo.getRow());
+            // 2. Complete 목록에 새 항목으로 추가
+            const cc = new CompleteController(todoText);
+            cc.addComplete();
         }
 }
 
