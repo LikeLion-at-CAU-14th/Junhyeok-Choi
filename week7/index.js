@@ -33,6 +33,7 @@ async function getData() {
     const toJSON = await fetchData.json();
     const datas = await toJSON.response.body.items.item; // JSON 구조에서 실제로 우리가 필요한 '사진 정보'들이 담긴 배열을 뽑아냄
     
+    // 불러오기를 누를 때마다 사진 교체
     container.innerHTML = "";
 
     datas.forEach((data,i) => {
@@ -76,4 +77,3 @@ async function getData() {
         console.error("데이터를 불러오는 중 오류 발생:", error);
     }
 }
-
