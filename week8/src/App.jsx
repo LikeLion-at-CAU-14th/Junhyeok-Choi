@@ -1,33 +1,24 @@
-import React from 'react'
-import styled from 'styled-components'
-import Header from './components/Header'
-import Body from './components/Body'
-import Footer from './components/Footer'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css'; 
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import AboutMe from './pages/AboutMe';
+import Contact from './pages/Contact';
 
-const App = () => {
-  return (
-    <Container>
-      <CardBox>
-        <Header />
-        <Body />
-        <Footer />
-      </CardBox>
-    </Container>
-  )
+function App() {
+    return (
+        <Router>
+            {/* 상단 네비게이션은 항상 고정 */}
+            <Navbar />
+            
+            {/* 경로에 따라 바뀌는 메인 화면 */}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/aboutme" element={<AboutMe />} />
+                <Route path="/contact" element={<Contact />} />
+            </Routes>
+        </Router>
+    );
 }
 
-export default App
-
-const Container = styled.div`
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  min-height: 100vh; 
-  background: #f9fafb;
-`
-const CardBox = styled.div`
-  background: white; 
-  border-radius: 20px; 
-  padding: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-`
+export default App;

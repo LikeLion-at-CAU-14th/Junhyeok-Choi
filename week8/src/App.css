@@ -1,0 +1,101 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background-color: black;
+    margin: 0;
+    height: 100vh;
+}
+
+/* 리액트 환경에서 레이아웃을 기존처럼 유지하기 위한 추가 코드 */
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+header {
+    padding: 20px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;   
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+nav a:hover {
+    transform: translateY(-3px);
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 90px;
+    font-weight: 1000; 
+}
+
+.aboutme {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.image img {
+    width: 500px;
+}
+
+h2 {
+    font-size: 50px;
+    margin: 0%;
+}
+
+h3 {
+    font-size: 35px;
+    margin: 0%;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0%;
+    font-size: 20px;
+    font-weight: bold;
+    list-style: none;
+}
+
+li {
+    margin-bottom: 10%;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact a {
+    color: white;
+    text-decoration: none;
+    font-size: 50px;
+    transition: all 0.2s ease;
+}
+
+.contact a:hover {
+    transform: translateY(-5px);
+}
