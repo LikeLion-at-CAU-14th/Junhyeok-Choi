@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 정보 - 한국 관광 사진 갤러리</title>
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="detail.css" />
+</head>
+<body>
+    <div id="detail-container">
+        <h1 id="detail-title">사진 제목</h1>
+        <img id="detail-image" src="" alt="관광 사진">
+        
+        <div id="info-box">
+            <p><strong>📍 장소:</strong> <span id="info-location"></span></p>
+            <p><strong>📅 촬영일:</strong> <span id="info-date"></span></p>
+            <p><strong>👤 촬영자:</strong> <span id="info-photographer"></span></p>
+            <p><strong>🔍 키워드:</strong> <span id="info-keywords"></span></p>
+        </div>
+        
+        <button onclick="history.back()">뒤로 가기</button>
+    </div>
+    <script src="detail.js"></script>
+</body>
+</html>
