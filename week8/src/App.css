@@ -1,0 +1,85 @@
+/* --- 헤더 및 네비게이션 (Navbar) --- */
+header {
+    padding: 20px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;   
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+nav a:hover {
+    transform: translateY(-3px);
+}
+
+/* --- 공통 메인 레이아웃 --- */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- 타이포그래피 --- */
+h1 {
+    font-size: 90px;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 50px;
+    margin: 0;
+}
+
+h3 {
+    font-size: 35px;
+    margin: 0;
+}
+
+/* --- About Me 페이지 --- */
+.aboutme {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.image img {
+    width: 500px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: bold;
+    list-style: none;
+}
+
+li {
+    margin-bottom: 10%;
+}
+
+/* --- Contact 페이지 --- */
+.contact {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact a {
+    color: white;
+    text-decoration: none;
+    font-size: 50px;
+    transition: all 0.2s ease;
+}
+
+.contact a:hover {
+    transform: translateY(-5px);
+}
