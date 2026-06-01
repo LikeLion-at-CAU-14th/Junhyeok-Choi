@@ -14,7 +14,13 @@ const LionCard = ({ data }) => {
             <Name>{data.name}</Name>
 
             {/* 파트 */}
-            <Part>프론트엔드</Part>
+            <Part $part={data.part}>
+                {data.part === 'fe' 
+                    ? '프론트엔드' 
+                    : data.part === 'be'
+                        ? '백엔드'
+                        : '기획디자인'}
+            </Part>
         </CardLayout>
     );
 };

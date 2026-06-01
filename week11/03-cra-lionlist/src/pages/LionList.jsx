@@ -10,12 +10,12 @@ const LionList = () => {
     const [filter, setFilter]     = useState('all');
     const [curPage, setCurPage]   = useState(1);
 
-    const PER_PAGE = 5; // 한 페이지에 보여줄 멤버 수
+    const PER_PAGE = 6; // 한 페이지에 보여줄 멤버 수
 
 
     const filteredData = filter === 'all'
         ? lionData
-        : lionData.filter((lion) => lion.gender === filter);
+        : lionData.filter((lion) => lion.part === filter);
 
     const totalPages    = Math.ceil(filteredData.length / PER_PAGE);
     const offset        = (curPage - 1) * PER_PAGE;
