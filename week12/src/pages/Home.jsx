@@ -8,6 +8,7 @@ const Home = () => {
       <MenuDom>
         <Title>12주차 실습</Title>
         <StyledLink to ="/books">📕 Book List</StyledLink>
+        <StyledLink to ="/quiz">📝 Quiz</StyledLink>
       </MenuDom>
     </div>
   )

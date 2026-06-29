@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import styled from 'styled-components';
 import BookList from './pages/BookList';
 import BookDetail from './pages/BookDetail';
+import Quiz from './pages/Quiz';
+import QuizResult from './pages/QuizResult';
 
 const App = () => {
   return (
@@ -15,6 +17,9 @@ const App = () => {
         <Route path='/books' element={<BookList />} >
           <Route path=':id' element={<BookDetail />} />
         </Route>
+        <Route path='/quiz' element={<Quiz />} />
+        <Route path='/quiz/result' element={<QuizResult />} />
+
         
 
       </Routes>
