@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Quiz = () => {
   const [questions, setQuestions] = useState([]);
@@ -32,33 +33,101 @@ const Quiz = () => {
   };
 
   return (
-    <div>
+    <Wrapper>
+      <Title>📝 퀴즈</Title>
       {questions.map((q) => (
-        <div key={q.id}>
-          <p>{q.question}</p>
-          {q.answers.map((answer) => (
-            <button
-              key={answer}
-              onClick={() => handleSelect(q.id, answer)}
-              style={{
-                backgroundColor: userAnswers.find(a => a.id === q.id)?.answer === answer
-                  ? '#75b5f5'
-                  : '',
-              }}
-            >
-              {answer}
-            </button>
-          ))}
-        </div>
+        <QuestionBox key={q.id}>
+          <Question>{q.id + 1}. {q.question}</Question>
+          <AnswerGroup>
+            {q.answers.map((answer) => (
+              <AnswerButton
+                key={answer}
+                selected={userAnswers.find(a => a.id === q.id)?.answer === answer}
+                onClick={() => handleSelect(q.id, answer)}
+              >
+                {answer}
+              </AnswerButton>
+            ))}
+          </AnswerGroup>
+        </QuestionBox>
       ))}
-      <button
+      <SubmitButton
         disabled={userAnswers.length < questions.length}
         onClick={handleSubmit}
       >
         제출하기
-      </button>
-    </div>
+      </SubmitButton>
+    </Wrapper>
   );
 };
 
 export default Quiz;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+`;
+
+const Title = styled.h1`
+  font-size: 36px;
+  color: #535353;
+  font-weight: 700;
+`;
+
+const QuestionBox = styled.div`
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const Question = styled.p`
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+`;
+
+const AnswerGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const AnswerButton = styled.button`
+  all: unset;
+  background-color: ${({ selected }) => (selected ? '#75b5f5' : '#e8f4fd')};
+  color: ${({ selected }) => (selected ? '#ffffff' : '#4a4a4a')};
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
+
+  &:hover {
+    background-color: ${({ selected }) => (selected ? '#75b5f5' : '#b8edfb')};
+  }
+`;
+
+const SubmitButton = styled.button`
+  all: unset;
+  background-color: ${({ disabled }) => (disabled ? '#cccccc' : '#75b5f5')};
+  color: white;
+  border-radius: 20px;
+  padding: 12px 40px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: ${({ disabled }) => (disabled ? '#cccccc' : '#9ecfff')};
+  }
+`;
