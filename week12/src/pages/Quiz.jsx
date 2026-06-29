@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Quiz = () => {
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -18,6 +20,15 @@ const Quiz = () => {
       const filtered = prev.filter(a => a.id !== questionId);
       return [...filtered, { id: questionId, answer }];
     });
+  };
+
+  const handleSubmit = async () => {
+    const sorted = [...userAnswers].sort((a, b) => a.id - b.id);
+    const response = await axios.post('https://week12-api-rcwo.onrender.com/api/answers', {
+      answers: sorted,
+    });
+    const score = response.data.results.filter(r => r.correct).length;
+    navigate('/quiz/result', { state: { results: response.data.results, score } });
   };
 
   return (
@@ -42,7 +53,7 @@ const Quiz = () => {
       ))}
       <button
         disabled={userAnswers.length < questions.length}
-        onClick={() => alert('제출!')}
+        onClick={handleSubmit}
       >
         제출하기
       </button>
