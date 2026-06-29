@@ -7,3 +7,13 @@ const Quiz = () => {
 }
 
 export default Quiz
+
+const [questions, setQuestions] = useState([]);
+
+useEffect(() => {
+  const fetchQuestions = async () => {
+    const response = await axios.get('https://week12-api-rcwo.onrender.com/api/questions');
+    setQuestions(response.data);
+  };
+  fetchQuestions();
+}, []);
