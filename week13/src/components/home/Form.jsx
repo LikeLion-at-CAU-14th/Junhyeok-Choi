@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { ThemeColorContext } from '../../context/context';
 import { Input, Label } from '../layout/common';
 
-const Form = ({ type, label }) => {
-    // ── useContext로 테마 읽기 ─────────────────
+const Form = ({ type, label, name, value, onChange }) => {
     const mode = useContext(ThemeColorContext);
 
     if (!type) {
@@ -14,7 +13,13 @@ const Form = ({ type, label }) => {
                 <RadioGroup>
                     {['남자', '여자'].map((v) => (
                         <RadioLabel key={v} accent={mode.main}>
-                            <RadioInput type="radio" name="gender" value={v} />
+                            <RadioInput
+                                type="radio"
+                                name={name}
+                                value={v}
+                                checked={value === v}
+                                onChange={onChange}
+                            />
                             {v}
                         </RadioLabel>
                     ))}
@@ -26,7 +31,13 @@ const Form = ({ type, label }) => {
     return (
         <Label>
             {label}
-            <Input type={type} accent={mode.main} />
+            <Input
+                type={type}
+                name={name}
+                value={value}
+                onChange={onChange}
+                accent={mode.main}
+            />
         </Label>
     );
 };
