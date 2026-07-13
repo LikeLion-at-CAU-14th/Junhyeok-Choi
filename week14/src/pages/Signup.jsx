@@ -2,16 +2,13 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { signup } from '../apis/auth';
+import { useForm } from '../hooks/useForm';
 
 const Signup = () => {
-    const [id, setId] = useState("");
-    const [pw, setPw] = useState("");
-    const [name, setName] = useState("");
-    const [age, setAge] = useState("");
-    const onChangeId = (e) => setId(e.target.value);
-    const onChangePw = (e) => setPw(e.target.value);
-    const onChangeName = (e) => setName(e.target.value);
-    const onChangeAge = (e) => setAge(e.target.value);
+    const [id, onChangeId] = useForm();
+    const [pw, onChangePw] = useForm();
+    const [name, onChangeName] = useForm();
+    const [age, onChangeAge] = useForm();
 
     const [errorMessage, setErrorMessage] = useState("");
     const [showToast, setShowToast] = useState(false);
