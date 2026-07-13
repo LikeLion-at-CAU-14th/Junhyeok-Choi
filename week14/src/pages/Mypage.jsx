@@ -26,6 +26,10 @@ const Mypage = () => {
   }, [navigate]);
 
   //TODO: 마이페이지에 로그아웃 버튼 만들어 로그아웃 기능 구현하기
+  const handleLogout = () => {
+    clearTokens(); 
+    navigate("/", { replace: true }); 
+  };
 
   if (loading) return (
     <Wrapper>
@@ -49,6 +53,7 @@ const Mypage = () => {
           <strong>{data.age}</strong>
         </InfoRow>
       </InfoList>
+      <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
     </Wrapper>
   )
 }
