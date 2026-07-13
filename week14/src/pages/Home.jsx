@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCookie, removeCookie, setCookie } from "../auth/cookieStorage";
 import { login } from "../apis/auth";
-import { setTokens } from "../auth/tokenStorage";
+import { getAccessToken, setTokens } from "../auth/tokenStorage";
 import { useForm } from "../hooks/useForm";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -15,6 +15,19 @@ const Home = () => {
   const [rememberId, setRememberId] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getAccessToken()) {
+      navigate("/mypage", { replace: true }); 
+      return;
+    }
+
+    const saveId = getCookie(SAVED_ID_COOKIE);
+    if(saveId) {
+        onChangeId({target: {value: saveId}});
+        setRememberId(true);
+    }
+  }, [navigate, onChangeId]);
 
   useEffect(() => {
     const saveId = getCookie(SAVED_ID_COOKIE);
