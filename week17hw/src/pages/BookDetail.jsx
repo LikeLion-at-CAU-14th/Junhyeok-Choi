@@ -1,6 +1,5 @@
 import React , { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import axios from 'axios';
 
 const BookDetail = () => {
@@ -39,42 +38,18 @@ const BookDetail = () => {
 
     return (
         <div>
-            <h1>{book.title}</h1>
-            <h3>{book.author}</h3>
-            <p>{book.description}</p>
-            <Button onClick={updateLikes}>
-                <Icon>👍</Icon> {likes}
-            </Button>
+            <h1 className="text-[32px] font-bold text-[#333] mb-[8px]">{book.title}</h1>
+            <h3 className="text-[20px] font-semibold text-[#666] mb-[16px]">{book.author}</h3>
+            <p className="text-[16px] text-[#444] mb-[20px] leading-relaxed">{book.description}</p>
+            <button
+                onClick={updateLikes}
+                className="bg-[#75b5f5] text-white border-none rounded-[25px] px-[15px] py-[5px] text-[16px] cursor-pointer flex items-center justify-center transition-colors duration-300 ease-in-out hover:bg-[#9ecfff] active:bg-[#3d9dfd]"
+            >
+                <span className="mr-[8px] text-[20px]">👍</span> {likes}
+            </button>
             
         </div>
     );
 };
 
 export default BookDetail;
-
-const Button = styled.button`
-  background-color: #75b5f5;
-  color: #ffffff;
-  border: none;
-  border-radius: 25px;
-  padding: 5px 15px;
-  font-size: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #9ecfff;
-  }
-
-  &:active {
-    background-color: #3d9dfd;
-  }
-`;
-
-const Icon = styled.span`
-  margin-right: 8px;
-  font-size: 20px;
-`;

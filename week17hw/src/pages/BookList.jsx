@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -24,62 +23,24 @@ const BookList = () => {
     }, [])
 
   return (
-    <MenuDom>
-      <BookListDom>
-        <Title onClick={goHome}>🏡</Title>
-        <Title>🦁Book List🦁</Title>
-        <ul>
+    <div className="flex justify-start items-center gap-[20px] w-full h-[80vh] m-[20px]">
+      <div className="flex flex-col justify-start bg-white p-[50px] h-[80%] rounded-r-[10px] shadow-[2px_2px_5px_rgba(0,0,0,0.1)]">
+        <div onClick={goHome} className="text-[40px] text-[#535353] font-bold cursor-pointer">🏡</div>
+        <div className="text-[40px] text-[#535353] font-bold mb-[20px]">🦁Book List🦁</div>
+        <ul className="list-disc pl-[20px] flex flex-col gap-[12px]">
           {/* [실습 12] id와 매치되는 책 정보 링크로 연결*/}
           {books.map((book) => (
-            <Link key={book.id} to={`/books/${book.id}`}>
-              <li>{book.title}</li>
+            <Link key={book.id} to={`/books/${book.id}`} className="no-underline text-[#4a4a4a] hover:text-[#75b5f5] transition-colors">
+              <li className="text-[18px] font-medium cursor-pointer">{book.title}</li>
             </Link>
           ))}
         </ul>
-      </BookListDom>
-      <BookDetailDom>
+      </div>
+      <div className="flex flex-col justify-start items-center p-[50px] h-full rounded-r-[10px] mt-[100px]">
         <Outlet />
-      </BookDetailDom>
-    </MenuDom>
+      </div>
+    </div>
   );
 };
 
 export default BookList;
-
-const MenuDom = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  height: 80vh;
-  margin: 20px;
-`;
-
-const Title = styled.div`
-  font-size: 40px;
-  color: #535353;
-  font-weight: 700;
-`;
-
-const BookListDom = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  background-color: white;
-  padding: 50px;
-  height: 80%;
-  border-radius: 0 10px 10px 0;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-`;
-
-const BookDetailDom = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  padding: 50px;
-  height: 100%;
-  border-radius: 0 10px 10px 0;
-  margin-top: 100px;
-`;

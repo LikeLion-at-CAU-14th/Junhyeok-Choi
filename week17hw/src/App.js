@@ -3,7 +3,6 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
-import styled from 'styled-components';
 import BookList from './pages/BookList';
 import BookDetail from './pages/BookDetail';
 import Quiz from './pages/Quiz';
@@ -11,7 +10,7 @@ import QuizResult from './pages/QuizResult';
 
 const App = () => {
   return (
-    <AppDom>
+    <div className="flex w-full min-h-[95vh] flex-col justify-center items-center gap-[30px]">
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/books' element={<BookList />} >
@@ -23,18 +22,8 @@ const App = () => {
         
 
       </Routes>
-    </AppDom>
+    </div>
   )
 }
 
 export default App;
-
-const AppDom = styled.div`
-  display: flex;
-  width: 100%;
-  min-height: 95vh;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-`;

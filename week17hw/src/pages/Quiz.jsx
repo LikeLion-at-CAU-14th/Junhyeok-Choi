@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 
 const Quiz = () => {
   const [questions, setQuestions] = useState([]);
@@ -33,101 +32,44 @@ const Quiz = () => {
   };
 
   return (
-    <Wrapper>
-      <Title>📝 퀴즈</Title>
+    <div className="flex flex-col items-center gap-[24px] p-[40px] w-full max-w-[600px]">
+      <h1 className="text-[36px] text-[#535353] font-bold">📝 퀴즈</h1>
       {questions.map((q) => (
-        <QuestionBox key={q.id}>
-          <Question>{q.id + 1}. {q.question}</Question>
-          <AnswerGroup>
-            {q.answers.map((answer) => (
-              <AnswerButton
-                key={answer}
-                selected={userAnswers.find(a => a.id === q.id)?.answer === answer}
-                onClick={() => handleSelect(q.id, answer)}
-              >
-                {answer}
-              </AnswerButton>
-            ))}
-          </AnswerGroup>
-        </QuestionBox>
+        <div key={q.id} className="bg-white rounded-[16px] p-[24px] w-full shadow-[2px_2px_8px_rgba(0,0,0,0.1)]">
+          <p className="text-[18px] font-semibold text-[#333] mb-[16px]">{q.id + 1}. {q.question}</p>
+          <div className="flex flex-col gap-[10px]">
+            {q.answers.map((answer) => {
+              const isSelected = userAnswers.find(a => a.id === q.id)?.answer === answer;
+              return (
+                <button
+                  key={answer}
+                  onClick={() => handleSelect(q.id, answer)}
+                  className={`border-none outline-none rounded-[12px] px-[16px] py-[10px] text-[15px] cursor-pointer transition-colors duration-200 ease-in-out text-center ${
+                    isSelected 
+                      ? 'bg-[#75b5f5] text-white hover:bg-[#75b5f5]' 
+                      : 'bg-[#e8f4fd] text-[#4a4a4a] hover:bg-[#b8edfb]'
+                  }`}
+                >
+                  {answer}
+                </button>
+              );
+            })}
+          </div>
+        </div>
       ))}
-      <SubmitButton
+      <button
         disabled={userAnswers.length < questions.length}
         onClick={handleSubmit}
+        className={`border-none outline-none rounded-[20px] px-[40px] py-[12px] text-[18px] font-bold transition-colors duration-200 ease-in-out ${
+          userAnswers.length < questions.length
+            ? 'bg-[#cccccc] text-white cursor-not-allowed hover:bg-[#cccccc]'
+            : 'bg-[#75b5f5] text-white cursor-pointer hover:bg-[#9ecfff]'
+        }`}
       >
         제출하기
-      </SubmitButton>
-    </Wrapper>
+      </button>
+    </div>
   );
 };
 
 export default Quiz;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  padding: 40px;
-  width: 100%;
-  max-width: 600px;
-`;
-
-const Title = styled.h1`
-  font-size: 36px;
-  color: #535353;
-  font-weight: 700;
-`;
-
-const QuestionBox = styled.div`
-  background-color: white;
-  border-radius: 16px;
-  padding: 24px;
-  width: 100%;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const Question = styled.p`
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 16px;
-`;
-
-const AnswerGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
-const AnswerButton = styled.button`
-  all: unset;
-  background-color: ${({ selected }) => (selected ? '#75b5f5' : '#e8f4fd')};
-  color: ${({ selected }) => (selected ? '#ffffff' : '#4a4a4a')};
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-align: center;
-
-  &:hover {
-    background-color: ${({ selected }) => (selected ? '#75b5f5' : '#b8edfb')};
-  }
-`;
-
-const SubmitButton = styled.button`
-  all: unset;
-  background-color: ${({ disabled }) => (disabled ? '#cccccc' : '#75b5f5')};
-  color: white;
-  border-radius: 20px;
-  padding: 12px 40px;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: ${({ disabled }) => (disabled ? '#cccccc' : '#9ecfff')};
-  }
-`;
