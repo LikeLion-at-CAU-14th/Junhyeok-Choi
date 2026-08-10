@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import useCartStore from '../store/useCartStore';
 
@@ -7,16 +7,26 @@ function CartPage() {
     const removeFromCart = useCartStore((state) => state.removeFromCart);
     const increaseQuantity = useCartStore((state) => state.increaseQuantity);
     const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+    const clearCart = useCartStore((state) => state.clearCart);
+
+    const [isOrderComplete, setIsOrderComplete] = useState(false);
 
     const totalPrice = cartItems.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
     );
 
+    const handleCheckout = () => {
+        clearCart();
+        setIsOrderComplete(true);
+    };
+
     return (
         <Section>
             <SectionTitle>장바구니</SectionTitle>
-            {cartItems.length === 0 ? (
+            {isOrderComplete ? (
+                <OrderComplete>주문이 완료되었습니다!</OrderComplete>
+            ) : cartItems.length === 0 ? (
                 <Empty>담긴 상품이 없습니다.</Empty>
             ) : (
                 <>
@@ -35,6 +45,7 @@ function CartPage() {
                         ))}
                     </List>
                     <Total>총 금액: {totalPrice.toLocaleString()}원</Total>
+                    <CheckoutButton onClick={handleCheckout}>결제하기</CheckoutButton>
                 </>
             )}
         </Section>

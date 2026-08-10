@@ -40,6 +40,7 @@ const useCartStore = create(
                 )
                 .filter((item) => item.quantity > 0),
         })),
+        clearCart: () => set({ cartItems: [] }),
 
     }),
     {name: 'cart-storage'}
