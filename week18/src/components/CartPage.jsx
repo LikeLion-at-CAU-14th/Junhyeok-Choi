@@ -5,6 +5,8 @@ import useCartStore from '../store/useCartStore';
 function CartPage() {
     const cartItems = useCartStore((state) => state.cartItems);
     const removeFromCart = useCartStore((state) => state.removeFromCart);
+    const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+    const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
 
     return (
         <Section>
@@ -13,11 +15,16 @@ function CartPage() {
                 <Empty>담긴 상품이 없습니다.</Empty>
             ) : (
                 <List>
-                    {cartItems.map((item, index) => (
-                        <Item key = {index}>
+                    {cartItems.map((item) => (
+                        <Item key = {item.id}>
                             <ItemName>{item.name}</ItemName>
-                            <ItemPrice>{item.price.toLocaleString()}원</ItemPrice>
-                            <RemoveButton onClick={() => removeFromCart(index)}>삭제</RemoveButton>
+                            <QuantityControl>
+                                <QtyButton onClick={() => decreaseQuantity(item.id)}>-</QtyButton>
+                                <span>{item.quantity}</span>
+                                <QtyButton onClick={() => increaseQuantity(item.id)}>+</QtyButton>
+                            </QuantityControl>
+                            <ItemPrice>{(item.price * item.quantity).toLocaleString()}원</ItemPrice>
+                            <RemoveButton onClick={() => removeFromCart(item.id)}>삭제</RemoveButton>
                         </Item>
                     ))}
                 </List>
