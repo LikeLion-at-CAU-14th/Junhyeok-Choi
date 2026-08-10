@@ -8,26 +8,34 @@ function CartPage() {
     const increaseQuantity = useCartStore((state) => state.increaseQuantity);
     const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
 
+    const totalPrice = cartItems.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+    );
+
     return (
         <Section>
             <SectionTitle>장바구니</SectionTitle>
             {cartItems.length === 0 ? (
                 <Empty>담긴 상품이 없습니다.</Empty>
             ) : (
-                <List>
-                    {cartItems.map((item) => (
-                        <Item key = {item.id}>
-                            <ItemName>{item.name}</ItemName>
-                            <QuantityControl>
-                                <QtyButton onClick={() => decreaseQuantity(item.id)}>-</QtyButton>
-                                <span>{item.quantity}</span>
-                                <QtyButton onClick={() => increaseQuantity(item.id)}>+</QtyButton>
-                            </QuantityControl>
-                            <ItemPrice>{(item.price * item.quantity).toLocaleString()}원</ItemPrice>
-                            <RemoveButton onClick={() => removeFromCart(item.id)}>삭제</RemoveButton>
-                        </Item>
-                    ))}
-                </List>
+                <>
+                    <List>
+                        {cartItems.map((item) => (
+                            <Item key = {item.id}>
+                                <ItemName>{item.name}</ItemName>
+                                <QuantityControl>
+                                    <QtyButton onClick={() => decreaseQuantity(item.id)}>-</QtyButton>
+                                    <span>{item.quantity}</span>
+                                    <QtyButton onClick={() => increaseQuantity(item.id)}>+</QtyButton>
+                                </QuantityControl>
+                                <ItemPrice>{(item.price * item.quantity).toLocaleString()}원</ItemPrice>
+                                <RemoveButton onClick={() => removeFromCart(item.id)}>삭제</RemoveButton>
+                            </Item>
+                        ))}
+                    </List>
+                    <Total>총 금액: {totalPrice.toLocaleString()}원</Total>
+                </>
             )}
         </Section>
     );
