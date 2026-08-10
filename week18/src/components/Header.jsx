@@ -4,7 +4,9 @@ import { useState } from "react";
 import CartPage from "./CartPage";
 
 function Header(){
-    const cartCount = useCartStore((state) => state.cartItems.length);
+    const cartCount = useCartStore((state) =>
+        state.cartItems.reduce((sum, item) => sum + item.quantity, 0)
+    );
     const [isCartOpen, setIsCartOpen] = useState(false);
 
 
