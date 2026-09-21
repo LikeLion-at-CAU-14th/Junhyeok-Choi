@@ -4,6 +4,8 @@ export interface Todo{
     isDone:boolean;
 }
 
+export type FilterType = 'all' | 'active' | 'completed';
+
 export interface QuoteResponse {
     id:number;
     quote:string;
