@@ -3,7 +3,7 @@ import Header from './components/Header';
 import TodoStats from './components/TodoStats';
 import TodoInput from './components/TodoInput';
 import { useState } from 'react';
-import type { QuoteResponse, Todo } from './types/todo';
+import type { FilterType, QuoteResponse, Todo } from './types/todo';
 import TodoItem from './components/TodoItem';
 
 
@@ -30,6 +30,8 @@ export default function App() {
     setTodos(todos.filter((todo) => todo.id! == id));
   };
   const completedCount = todos.filter((todo) => todo.isDone).length;
+  // TODO [과제 2]: 필터 상태(filter) 선언하기
+  const [filter, setFilter] = useState<FilterType>('all');
   // TODO [STEP 5]: 명언 상태(quote, author) 및 로딩 상태(isLoading) 선언하기
   const [quote,setQuote] = useState<string>('')
   const [author,setAuthor] = useState<string>('')
