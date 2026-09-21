@@ -32,6 +32,12 @@ export default function App() {
   const completedCount = todos.filter((todo) => todo.isDone).length;
   // TODO [과제 2]: 필터 상태(filter) 선언하기
   const [filter, setFilter] = useState<FilterType>('all');
+  // TODO [과제 3]: 필터 버튼 목록
+  const filterOptions: { label: string; value: FilterType }[] = [
+    { label: '전체', value: 'all' },
+    { label: '진행 중', value: 'active' },
+    { label: '완료', value: 'completed' },
+  ];
   // TODO [STEP 5]: 명언 상태(quote, author) 및 로딩 상태(isLoading) 선언하기
   const [quote,setQuote] = useState<string>('')
   const [author,setAuthor] = useState<string>('')
@@ -73,6 +79,18 @@ const handleFetchQuote = async() => {
         </AdviceSection>
 
         <TodoInput onAdd={handleAdd}/>
+        {/* TODO [과제 3]: 전체 / 진행 중 / 완료 필터 버튼 */}
+        <FilterContainer>
+          {filterOptions.map((option) => (
+            <FilterButton
+              key={option.value}
+              $active={filter === option.value}
+              onClick={() => setFilter(option.value)}
+            >
+              {option.label}
+            </FilterButton>
+          ))}
+        </FilterContainer>
         <TodoList>
         {todos.length === 0 ? (
           <Empty>할 일이 없습니다. 새로운 할 일을 추가해보세요!</Empty>
@@ -171,8 +189,6 @@ const RecommendButton = styled.button`
     background-color: #dbe4ff;
   }
 `;
-/*
-// 과제용 스타일 (필요시 사용해주세요!)
 const FilterContainer = styled.div`
   display: flex;
   gap: 8px;
@@ -197,4 +213,3 @@ const FilterButton = styled.button<{ $active: boolean }>`
     border-color: #ff6b35;
   }
 `;
-*/
