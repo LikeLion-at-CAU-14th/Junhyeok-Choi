@@ -27,7 +27,7 @@ export default function App() {
     );
   };
   const handleDelete = (id:number)=>{
-    setTodos(todos.filter((todo) => todo.id! == id));
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
   const completedCount = todos.filter((todo) => todo.isDone).length;
   // TODO [과제 2]: 필터 상태(filter) 선언하기
@@ -38,6 +38,12 @@ export default function App() {
     { label: '진행 중', value: 'active' },
     { label: '완료', value: 'completed' },
   ];
+  // TODO [과제 4]: 선택한 필터에 따라 Todo 목록 필터링하기
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === 'active') return !todo.isDone;
+    if (filter === 'completed') return todo.isDone;
+    return true;
+  });
   // TODO [STEP 5]: 명언 상태(quote, author) 및 로딩 상태(isLoading) 선언하기
   const [quote,setQuote] = useState<string>('')
   const [author,setAuthor] = useState<string>('')
@@ -92,10 +98,10 @@ const handleFetchQuote = async() => {
           ))}
         </FilterContainer>
         <TodoList>
-        {todos.length === 0 ? (
+        {filteredTodos.length === 0 ? (
           <Empty>할 일이 없습니다. 새로운 할 일을 추가해보세요!</Empty>
         ) : (
-          todos.map((todo) => (
+          filteredTodos.map((todo) => (
             <TodoItem
               key = {todo.id}
               todo = {todo}
