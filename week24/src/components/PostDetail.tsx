@@ -15,8 +15,19 @@ interface PostDetailProps {
 
 export default function PostDetail({
   post,
+  isPending,
+  isError,
   onDelete,
 }: PostDetailProps) {
+  // 상세 게시글을 불러오는 중일 때 보여줄 화면
+  if (isPending) {
+    return <Box>게시글을 불러오는 중입니다...</Box>;
+  }
+
+  // 상세 게시글 조회에 실패했을 때 보여줄 화면
+  if (isError) {
+    return <Box>게시글을 불러오지 못했습니다.</Box>;
+  }
 
   if (!post) {
     return <Box>게시글을 선택해보세요.</Box>;
