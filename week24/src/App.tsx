@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Header from './components/Header';
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
-import { addPost, getPosts } from './api/posts';
+import { addPost, getPost, getPosts } from './api/posts';
 
 export default function App() {
   // 선택된 게시글 id 상태 만들기
@@ -20,6 +20,15 @@ export default function App() {
   });
 
   // [과제 3] useQuery로 선택된 게시글 상세 조회하기 (staleTime 사용해보기)
+  const postDetailQuery = useQuery({
+    // 게시글마다 캐시가 따로 저장되도록 id를 queryKey에 포함
+    queryKey: ['post', selectedPostId],
+    queryFn: () => getPost(selectedPostId!),
+    // 선택된 게시글이 없을 때는 조회하지 않음
+    enabled: selectedPostId !== null,
+    // 30초 동안은 fresh 상태로 보고 같은 게시글을 다시 선택해도 재요청하지 않음
+    staleTime: 1000 * 30,
+  });
 
   // [실습] useMutation으로 게시글 추가 기능 만들기
   const addPostMutation = useMutation({
