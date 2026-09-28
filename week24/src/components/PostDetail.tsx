@@ -5,7 +5,8 @@ interface PostDetailProps {
   post?: Post; //상세 주소로 받아온 게시글 데이터
 
   // [과제2] 상세 조회 query에서 받은 로딩/에러 상태 타입 작성하기
-
+  isPending: boolean;
+  isError: boolean;
 
   // 삭제 버튼을 눌렀을 때 실행할 함수.
   // 부모 컴포넌트에서 delete mutation을 실행하도록 연결.
