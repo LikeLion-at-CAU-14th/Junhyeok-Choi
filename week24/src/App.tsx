@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Header from './components/Header';
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
-import { addPost, getPost, getPosts } from './api/posts';
+import { addPost, deletePost, getPost, getPosts } from './api/posts';
 
 export default function App() {
   // 선택된 게시글 id 상태 만들기
@@ -39,6 +39,17 @@ export default function App() {
   });
 
   // [과제 4] useMutation으로 게시글 삭제 기능 만들기
+  const deletePostMutation = useMutation({
+    mutationFn: deletePost,
+    onSuccess: (_, deletedId) => {
+      // 삭제 성공 후 게시글 목록을 다시 불러와 최신화
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+
+      // 삭제된 게시글의 상세 캐시를 지우고, 상세 영역 선택도 해제
+      queryClient.removeQueries({ queryKey: ['post', deletedId] });
+      setSelectedPostId(null);
+    },
+  });
 
   return (
     <Wrapper>
