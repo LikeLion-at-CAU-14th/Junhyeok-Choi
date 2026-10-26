@@ -1,4 +1,13 @@
+import Image from 'next/image';
+import { Do_Hyeon } from 'next/font/google';
 import { movies } from '@/data/movies';
+import MovieReviewButton from '@/components/MovieReviewButton';
+
+// 과제2 - 상세 페이지에만 다른 폰트 적용
+const doHyeon = Do_Hyeon({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 interface MovieDetailPageProps {
   params: Promise<{
@@ -20,12 +29,15 @@ export default async function MovieDetailPage({
   }
 
   return (
-    <main>
+    <main className={doHyeon.className}>
       <h1>{movie.title}</h1>
-      
-      <img
+
+      {/*과제3 - next/image로 포스터 최적화*/}
+      <Image
         src={movie.image}
         alt={movie.title}
+        width={300}
+        height={430}
       />
 
       <p>
@@ -34,8 +46,8 @@ export default async function MovieDetailPage({
 
       <p style={{ whiteSpace: 'pre-line' }}>{movie.description}</p>
 
-      {/*과제3 - 관람평 불러오기*/}
-
+      {/*과제4 - 관람평 불러오기*/}
+      <MovieReviewButton />
     </main>
   );
 }

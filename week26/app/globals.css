@@ -147,6 +147,7 @@ header a {
   border: 1px solid #ddd;
   border-radius: 12px;
   background: white;
+  color: #222;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -162,8 +163,8 @@ header a {
 
   padding: 20px 40px;
 
-  background: white;
-  border-bottom: 1px solid #ddd;
+  background: #111;
+  border-bottom: 1px solid #333;
 }
 
 .header h1 {
@@ -171,6 +172,15 @@ header a {
   font-size: 22px;
 }
 
+.header nav {
+  display: flex;
+  gap: 24px;
+}
+
 .header nav a {
   font-weight: 600;
+}
+
+.header nav a:hover {
+  opacity: 0.7;
 }
