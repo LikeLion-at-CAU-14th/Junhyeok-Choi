@@ -1,5 +1,6 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
+import NavLink from "@/components/NavLink";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,12 +21,13 @@ export default function RootLayout({
             🦁 맛집 도감
           </Link>
           <nav className="flex gap-6 font-medium">
-            <Link href="/restaurants">맛집 목록</Link>
-            <Link href="/about">소개</Link>
+            <NavLink href="/restaurants">맛집 목록</NavLink>
+            <NavLink href="/random">오늘 뭐 먹지</NavLink>
+            <NavLink href="/about">소개</NavLink>
           </nav>
         </header>
         <main className="mx-auto max-w-3xl px-6 py-10">{children}</main>
       </body>
     </html>
-  )
+  );
 }
