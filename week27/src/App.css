@@ -1,0 +1,498 @@
+/* ===== 레이아웃 ===== */
+.app {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.chat-container {
+  width: 100%;
+  max-width: 760px;
+  height: min(820px, calc(100dvh - 48px));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+}
+
+/* ===== 헤더 ===== */
+.chat-header {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff9a3d, var(--brand));
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  box-shadow: 0 6px 16px rgba(255, 119, 16, 0.3);
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.status {
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text-sub);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--online);
+}
+
+.status-busy .status-dot {
+  background: var(--brand);
+  animation: pulse 1s infinite ease-in-out;
+}
+
+.icon-button {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text-sub);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-button:hover:not(:disabled) {
+  background: var(--surface-muted);
+  color: var(--text);
+}
+
+.icon-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== 메시지 영역 ===== */
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 26px 22px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.message-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  animation: fade-up 0.25s ease-out;
+}
+
+.user-row {
+  justify-content: flex-end;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--brand-soft);
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+}
+
+.message-group {
+  max-width: 78%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-row .message-group {
+  align-items: flex-end;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 20px;
+  line-height: 1.6;
+  font-size: 15px;
+  text-align: left;
+  word-break: break-word;
+}
+
+.user-message {
+  background: linear-gradient(135deg, #ff8a2a, var(--brand));
+  color: #fff;
+  border-top-right-radius: 6px;
+  white-space: pre-wrap;
+}
+
+.assistant-message {
+  background: var(--surface-muted);
+  color: var(--text);
+  border-top-left-radius: 6px;
+}
+
+.message-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px;
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+.copy-button {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 11.5px;
+  color: var(--text-faint);
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  color: var(--brand);
+}
+
+/* ===== 오류 메시지 ===== */
+.error-message {
+  background: var(--error-soft);
+  border: 1px solid color-mix(in srgb, var(--error) 25%, transparent);
+}
+
+.error-title {
+  display: block;
+  color: var(--error);
+  font-size: 14px;
+}
+
+.error-detail {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: var(--text-sub);
+}
+
+.retry-button {
+  margin-top: 10px;
+  padding: 6px 14px;
+  border: 1px solid var(--error);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--error);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.retry-button:hover:not(:disabled) {
+  background: var(--error);
+  color: #fff;
+}
+
+/* ===== 마크다운 ===== */
+.markdown > * {
+  margin: 0;
+}
+
+.markdown > * + * {
+  margin-top: 8px;
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 20px;
+}
+
+.markdown li + li {
+  margin-top: 3px;
+}
+
+.markdown .md-heading {
+  font-weight: 700;
+  font-size: 15.5px;
+}
+
+.markdown code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+}
+
+.markdown pre {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #1e1e24;
+  color: #e6e6ec;
+  overflow-x: auto;
+}
+
+.markdown pre code {
+  padding: 0;
+  background: none;
+  color: inherit;
+}
+
+.markdown hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+/* ===== 추천 질문 ===== */
+.suggestions {
+  margin-left: 44px;
+  animation: fade-up 0.35s ease-out;
+}
+
+.suggestions p {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.suggestion-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-chip {
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 13.5px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.suggestion-chip:hover {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}
+
+/* ===== 로딩 ===== */
+.loading-message {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 16px 18px;
+}
+
+.loading-message span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.loading-message span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.loading-message span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* ===== 입력 영역 ===== */
+.chat-input-area {
+  padding: 12px 18px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.input-box {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 6px 6px 6px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface-muted);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input-box:focus-within {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 15%, transparent);
+}
+
+.input-box textarea {
+  flex: 1;
+  min-height: 40px;
+  max-height: 140px;
+  padding: 9px 0;
+  border: 0;
+  background: transparent;
+  resize: none;
+  outline: none;
+  line-height: 1.45;
+  font-size: 15px;
+}
+
+.input-box textarea::placeholder {
+  color: var(--text-faint);
+}
+
+.send-button {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.send-button svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.send-button:hover:not(:disabled) {
+  background: var(--brand-strong);
+  transform: scale(1.06);
+}
+
+.send-button:disabled {
+  background: var(--text-faint);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-hint {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+/* ===== 애니메이션 ===== */
+@keyframes bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===== 모바일 ===== */
+@media (max-width: 600px) {
+  .app {
+    padding: 0;
+  }
+
+  .chat-container {
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .chat-body {
+    padding: 20px 16px 8px;
+  }
+
+  .message-group {
+    max-width: 85%;
+  }
+
+  .suggestions {
+    margin-left: 0;
+  }
+
+  .input-hint {
+    display: none;
+  }
+}
