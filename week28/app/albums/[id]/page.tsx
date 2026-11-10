@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAlbum } from "@/data/albums";
+import Image from "next/image";
 
 // 과제: generateMetadata로 앨범마다 title, description 다르게 넣기
 
@@ -27,7 +28,15 @@ export default async function AlbumPage({
       </Link>
 
       <div className="detail">
-        <img src={album.cover} className="detail-cover" />
+        <Image
+          src={album.cover}
+          alt={`${album.artist} - ${album.title} 앨범 표지`}
+          width={600}
+          height={600}
+          sizes="(max-width: 768px) 100vw, 420px"
+          preload
+          className="detail-cover"
+        />
 
         <div className="detail-info">
           <div className="detail-genre">
